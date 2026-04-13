@@ -28,6 +28,17 @@ cask "helium-linux" do
   preflight do
     FileUtils.mkdir_p "#{Dir.home}/.local/share/applications"
     FileUtils.mkdir_p "#{Dir.home}/.local/share/icons/hicolor/256x256/apps"
+
+    desktop_file = "#{staged_path}/helium-#{version}-#{arch}_linux/helium.desktop"
+    contents = File.read(desktop_file)
+
+    brew_exec = "#{HOMEBREW_PREFIX}/bin/helium"
+
+    contents.gsub!(/^Exec=helium(.*)$/, "Exec=#{brew_exec}\\1")
+    contents.gsub!(/^TryExec=helium$/, "TryExec=#{brew_exec}")
+    contents.gsub!(/^StartupNotify=true$/, "StartupNotify=false")
+
+    File.write(desktop_file, contents)
   end
 
   zap trash: [

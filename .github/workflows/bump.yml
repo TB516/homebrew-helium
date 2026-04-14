@@ -1,0 +1,27 @@
+name: Bump Version
+
+on:
+  schedule:
+    - cron: "0 3,15 * * *"
+
+  workflow_dispatch:
+
+jobs:
+  bump:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - name: Set up Homebrew
+        uses: Homebrew/actions/setup-homebrew@59e6b20d96df1a3c9ccb0aa402676e01a4cc6ff3 # main
+
+      - name: Configure git
+        uses: Homebrew/actions/git-user-config@59e6b20d96df1a3c9ccb0aa402676e01a4cc6ff3 # main
+
+      - name: Bump packages
+        env:
+          HOMEBREW_DEVELOPER: 1
+          HOMEBREW_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          brew bump --tap ${{ github.repository }} --open-pr --no-fork

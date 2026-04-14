@@ -1,4 +1,4 @@
-cask "helium-linux" do
+cask "helium-browser-linux" do
   arch arm: "arm64", intel: "x86_64"
 
   os linux: "linux"

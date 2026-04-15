@@ -32,7 +32,6 @@ cask "helium-browser-linux" do
     brew_exec = "#{HOMEBREW_PREFIX}/bin/helium"
 
     contents.gsub!(/^Exec=helium(.*)$/, "Exec=#{brew_exec}\\1")
-    contents.gsub!(/^TryExec=helium$/, "TryExec=#{brew_exec}")
     contents.gsub!(/^StartupNotify=true$/, "StartupNotify=false")
 
     File.write(desktop_file, contents)

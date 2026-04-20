@@ -37,7 +37,7 @@ cask "helium-browser-linux" do
     File.write(desktop_file, contents)
   end
 
-  zap trash: [
+  zap delete: [
     "~/.cache/net.imput.helium",
     "~/.config/net.imput.helium",
   ]

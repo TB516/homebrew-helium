@@ -18,13 +18,15 @@ cask "helium-browser-linux" do
 
   binary "helium-#{version}-#{arch}_linux/helium-wrapper", target: "helium"
   artifact "helium-#{version}-#{arch}_linux/helium.desktop",
-           target: "#{Dir.home}/.local/share/applications/helium.desktop"
+           target: "#{ENV["XDG_DATA_HOME"] || "#{Dir.home}/.local/share"}/applications/helium.desktop"
   artifact "helium-#{version}-#{arch}_linux/product_logo_256.png",
-           target: "#{Dir.home}/.local/share/icons/hicolor/256x256/apps/helium.png"
+           target: "#{ENV["XDG_DATA_HOME"] || "#{Dir.home}/.local/share"}/icons/hicolor/256x256/apps/helium.png"
 
   preflight do
-    FileUtils.mkdir_p "#{Dir.home}/.local/share/applications"
-    FileUtils.mkdir_p "#{Dir.home}/.local/share/icons/hicolor/256x256/apps"
+    xdg_data_home = ENV["XDG_DATA_HOME"] || "#{Dir.home}/.local/share"
+
+    FileUtils.mkdir_p "#{xdg_data_home}/applications"
+    FileUtils.mkdir_p "#{xdg_data_home}/icons/hicolor/256x256/apps"
 
     desktop_file = "#{staged_path}/helium-#{version}-#{arch}_linux/helium.desktop"
     contents = File.read(desktop_file)

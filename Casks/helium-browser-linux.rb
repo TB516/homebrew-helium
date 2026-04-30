@@ -2,9 +2,9 @@ cask "helium-browser-linux" do
   arch arm: "arm64", intel: "x86_64"
   os linux: "linux"
 
-  version "0.11.6.1"
-  sha256 arm64_linux:  "6992b6aa7a996fbf84a078f5ea1d81795c1e2a000d331e645da8ae2e46c8d304",
-         x86_64_linux: "ac9f4f2194c753bc339dd02a75d9271f563a5358f924b3ad13536d6aa4abc7bc"
+  version "0.11.7.1"
+  sha256 arm64_linux:  "444fce201cf360ee6af710ae81450ce3aae4eb97a5963238982549e49c0113e4",
+         x86_64_linux: "57476b02588a07c1c59310c6f48f9b3d384b1f423f709a46f76bf768e45a5ff6"
 
   url "https://github.com/imputnet/helium-linux/releases/download/#{version}/helium-#{version}-#{arch}_linux.tar.xz"
   name "Helium"
